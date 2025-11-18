@@ -1,0 +1,59 @@
+name: Generar Imágenes de Estadísticas
+
+on:
+  push:
+    branches: [ master ]
+  schedule:
+    - cron: "5 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  # AÑADIR ESTAS LÍNEAS PARA ASEGURAR PERMISOS DE LECTURA DE DATOS
+  actions: read
+  packages: read
+  security-events: write
+  # Los permisos de lectura de perfil y repositorios son cruciales
+  pull-requests: write
+  statuses: write
+  id-token: write
+  issues: write
+  metadata: read
+  deployments: write
+  pages: write 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Obtener código del repositorio
+        uses: actions/checkout@v4 # Versión actualizada y segura
+
+      - name: Configurar Python 3.8
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.8'
+
+      - name: Instalar dependencias
+        run: |
+          python3 -m pip install -r requirements.txt # Asume que requirements.txt existe
+
+      - name: Generar imágenes
+        run: |
+          python3 generate_images.py
+        env:
+          # Usamos el token por defecto (GITHUB_TOKEN) para la autenticación en la API.
+          # Lo asignamos a ACCESS_TOKEN (el nombre que espera tu script de Python).
+          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EXCLUDED: ${{ secrets.EXCLUDED }}
+          EXCLUDED_LANGS: ${{ secrets.EXCLUDED_LANGS }}
+          EXCLUDE_FORKED_REPOS: true
+
+      - name: Commit y Subir archivos generados (Generar el 'push')
+        # Esta acción maneja automáticamente la configuración de git, el commit y el push.
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: '🤖 Automated: Actualización de insignias de estadísticas'
+          # Solo hace commit de los archivos dentro de la carpeta generated/
+          file_pattern: 'generated/*.svg'
