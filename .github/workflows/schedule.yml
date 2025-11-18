@@ -9,17 +9,8 @@ on:
 
 # Bloque de permisos corregido: solo incluimos los scopes necesarios y válidos
 permissions:
-  contents: write
-  issues: write
-  pull-requests: write
-  statuses: write
-  actions: read
-  packages: write
-  security-events: write
-  id-token: write
-  deployments: write
-  pages: write
-  metadata: read 
+  contents: write # Único permiso necesario para el commit y push.
+  metadata: read # Necesario para la acción 'checkout'
 
 jobs:
   build:
