@@ -9,7 +9,7 @@ on:
 
 permissions:
   contents: write
-  metadata: read
+  models: read
 
 jobs:
   build:
