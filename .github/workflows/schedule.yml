@@ -7,21 +7,20 @@ on:
     - cron: "5 0 * * *"
   workflow_dispatch:
 
+# Bloque de permisos corregido: solo incluimos los scopes necesarios y válidos
 permissions:
-  contents: write
-  # AÑADIR ESTAS LÍNEAS PARA ASEGURAR PERMISOS DE LECTURA DE DATOS
-  actions: read
-  packages: read
-  security-events: write
-  # Los permisos de lectura de perfil y repositorios son cruciales
-  pull-requests: write
-  statuses: write
-  id-token: write
-  issues: write
-  metadata: read
-  deployments: write
-  pages: write 
-
+  contents: write # Para subir archivos SVG (COMMIT/PUSH)
+  issues: write     # Permiso de la API (GraphQL)
+  pull-requests: write # Permiso de la API (GraphQL)
+  statuses: write    # Permiso de la API (GraphQL)
+  actions: read      # Permiso de la API
+  packages: write    # Permiso de la API
+  security-events: write # Permiso de la API
+  id-token: write    # Permiso de la API
+  deployments: write # Permiso de la API
+  pages: write       # Permiso de la API
+  metadata: read     # Permiso de la API (Necesario para checkout)
+  
 jobs:
   build:
     runs-on: ubuntu-latest
