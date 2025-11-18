@@ -9,18 +9,18 @@ on:
 
 # Bloque de permisos corregido: solo incluimos los scopes necesarios y válidos
 permissions:
-  contents: write # Para subir archivos SVG (COMMIT/PUSH)
-  issues: write     # Permiso de la API (GraphQL)
-  pull-requests: write # Permiso de la API (GraphQL)
-  statuses: write    # Permiso de la API (GraphQL)
-  actions: read      # Permiso de la API
-  packages: write    # Permiso de la API
-  security-events: write # Permiso de la API
-  id-token: write    # Permiso de la API
-  deployments: write # Permiso de la API
-  pages: write       # Permiso de la API
-  metadata: read     # Permiso de la API (Necesario para checkout)
-  
+  contents: write
+  issues: write
+  pull-requests: write
+  statuses: write
+  actions: read
+  packages: write
+  security-events: write
+  id-token: write
+  deployments: write
+  pages: write
+  metadata: read 
+
 jobs:
   build:
     runs-on: ubuntu-latest
