@@ -42,3 +42,4 @@ jobs:
         with:
           commit_message: '🤖 Automated: Actualización de insignias de estadísticas'
           file_pattern: 'generated/*.svg'
+          push_options: '--force'
