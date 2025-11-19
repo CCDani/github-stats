@@ -32,7 +32,7 @@ jobs:
         run: |
           python3 generate_images.py
         env:
-          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACCESS_TOKEN: ${{ secrets.PAT_STATS }}
           EXCLUDED: ${{ secrets.EXCLUDED }}
           EXCLUDED_LANGS: ${{ secrets.EXCLUDED_LANGS }}
           EXCLUDE_FORKED_REPOS: true
